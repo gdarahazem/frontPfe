@@ -1,0 +1,201 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Tester votre application</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/dashboard/main">
+                <i class="fas fa-home"></i> Accueil</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">test</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Basic Example | Horizontal Layout -->
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>
+              <strong>Les étapes de </strong> test</h2>
+            <ul class="header-dropdown m-r--5">
+              <li class="dropdown">
+                <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
+                   role="button" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">more_vert</i>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                  <li>
+                    <a href="#" onClick="return false;">Action</a>
+                  </li>
+                  <li>
+                    <a href="#" onClick="return false;">Another action</a>
+                  </li>
+                  <li>
+                    <a href="#" onClick="return false;">Something else here</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="body">
+            <aw-wizard #wizard [navBarLayout]="'large-empty-symbols'">
+              <aw-wizard-step [stepTitle]="'Step 1'">
+                <ng-template awWizardStepSymbol><i class="fa fa-search"></i></ng-template>
+                <div class="centered-content">
+                  <div>
+                    <form #f1="ngForm">
+<!--                      <div class="form-group form-float">-->
+<!--                        <div class="form-line">-->
+<!--                          <input type="text" class="form-control" name="username"-->
+<!--                                 id="username" placeholder="Username">-->
+<!--                        </div>-->
+<!--                      </div>-->
+
+                      <div class="mt-5 pt-3 mb-5 row">
+                        <div class="col-8">
+                          <h4>choisissez un projet</h4>
+                          <mat-form-field style="width:100%;">
+                            <mat-label>sélectionner un projet</mat-label>
+                            <mat-select #sval (valueChange)="changeProject(sval.value)" >
+                              <mat-option *ngFor="let project of projects" [value]="project.url">
+                                {{project.nom}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <a [href]="projectUrl" *ngIf="projectUrl !== null" target="_blank">visualiser le projet</a>
+                        </div>
+
+
+                      </div>
+
+                    </form>
+                  </div>
+                  <div class="text-right">
+                    <button class="btn-hover btn-border-radius color-8" (click)="onSubmit()" awNextStep>Suivant</button>
+                  </div>
+                </div>
+              </aw-wizard-step>
+              <aw-wizard-step [stepTitle]="'Step 2'">
+                <ng-template awWizardStepSymbol><i class="fa fa-upload"></i></ng-template>
+                <div class="centered-content">
+                  <div>
+                    <form>
+                      <div class="row justify-content-center mb-2">
+                        <div class="mt-3 mb-3">
+                          <button type="button" class="btn btn-outline-default btn-border-radius" (click)="openIntelig()">Ouvrir IDE pour ajouter un nouveau cas de test</button>
+                        </div>
+                      </div>
+                      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                        <!--- Note that these columns can be defined in any order.
+                              The actual rendered columns are set as a property on the row definition" -->
+
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="id">
+                          <th mat-header-cell *matHeaderCellDef> ID. </th>
+                          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                       <ng-container matColumnDef="nom">
+                          <th mat-header-cell *matHeaderCellDef> Nom </th>
+                          <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="delete">
+                          <th mat-header-cell *matHeaderCellDef> Action 1 </th>
+                          <td mat-cell *matCellDef="let element"> <button style="border: none"><span class="material-icons text-danger">delete</span></button> </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="update">
+                          <th mat-header-cell *matHeaderCellDef>  Action 2 </th>
+                          <td mat-cell *matCellDef="let element"> <button style="border: none;"><span class="material-icons text-warning" >system_update_alt</span></button> </td>
+                        </ng-container>
+
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+
+
+
+                    </form>
+                  </div>
+
+                  <div class="text-right">
+                    <button class="btn-hover btn-border-radius color-10"
+                            awPreviousStep>Précédente</button>
+                    <button class="btn-hover btn-border-radius color-8" awNextStep>Suivant</button>
+                  </div>
+
+                </div>
+              </aw-wizard-step>
+              <aw-wizard-step [stepTitle]="'Step 3'">
+                <ng-template awWizardStepSymbol><i class="fa fa-upload"></i></ng-template>
+                <div class="centered-content">
+                  <div>
+                    <form>
+                      <div class="row mt-3">
+                        <div class="col-3"></div>
+                        <div class="col-6">
+                          <mat-form-field class="w-100">
+                            <mat-label>sélectionner les packages que vous souhaitez tester</mat-label>
+                            <mat-select [formControl]="pakageSelected" multiple>
+                              <mat-option *ngFor="let package of packageList" [value]="package">{{package}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+                        </div>
+                        <div class="col-3"></div>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <div>
+                          <button type="button" class="btn btn-success waves-effect">
+                            <i class="material-icons">play_arrow</i>
+                            <span>exécuter</span>
+                          </button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+
+                  <div class="text-right">
+                    <button class="btn-hover btn-border-radius color-10"
+                            awPreviousStep>Précédente</button>
+                    <button class="btn-hover btn-border-radius color-8" awNextStep>Suivant</button>
+                  </div>
+
+                </div>
+              </aw-wizard-step>
+              <aw-wizard-step [stepTitle]="'Step 4'">
+                <ng-template awWizardStepSymbol><i class="fa fa-file"></i></ng-template>
+                <div class="centered-content">
+                  <div class="mt-3 font-bold justify-content-center">
+                    Cliqué sur terminer pour que tu puisse voir les rapports
+                  </div>
+                  <div class="text-right">
+                    <button class="btn-hover btn-border-radius color-10"
+                            awPreviousStep>Précédente</button>
+                    <button class="btn-hover btn-border-radius color-5" (click)="openDashbord()">Terminer</button>
+                  </div>
+
+                </div>
+              </aw-wizard-step>
+
+            </aw-wizard>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

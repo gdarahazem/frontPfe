@@ -1,0 +1,158 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Consulter les résultats</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/dashboard/main">
+                <i class="fas fa-home"></i> Accueil</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">bdd</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Basic Example | Horizontal Layout -->
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>
+              <strong>Consulter les résultats</strong> </h2>
+            <ul class="header-dropdown m-r--5">
+              <li class="dropdown">
+                <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
+                   role="button" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">more_vert</i>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                  <li>
+                    <a href="#" onClick="return false;">Action</a>
+                  </li>
+                  <li>
+                    <a href="#" onClick="return false;">Another action</a>
+                  </li>
+                  <li>
+                    <a href="#" onClick="return false;">Something else here</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="body">
+            <aw-wizard #wizard [navBarLayout]="'large-empty-symbols'">
+              <aw-wizard-step [stepTitle]="'Step 1'">
+                <ng-template awWizardStepSymbol><i class="fa fa-search"></i></ng-template>
+                <div class="centered-content">
+                  <div>
+                    <form #f1="ngForm">
+
+                      <div class="mt-5 pt-3 mb-5 row">
+                        <div class="col-8">
+                          <label>choisissez un projet</label>
+                          <select class="browser-default" name="projectUrl" [(ngModel)]="projectUrl">
+                            <option [value]="">sélectionner un projet</option>
+                            <option [value]="project.url" *ngFor="let project of projects">{{project.nom}}</option>
+                          </select>
+                          <a [href]="projectUrl" *ngIf="projectUrl !== null" target="_blank">visualiser le projet</a>
+                        </div>
+
+
+                      </div>
+
+                    </form>
+                  </div>
+                  <div class="text-right">
+                    <button class="btn-hover btn-border-radius color-8" (click)="onSubmit()" awNextStep>Suivant</button>
+                  </div>
+                </div>
+              </aw-wizard-step>
+              <aw-wizard-step [stepTitle]="'Step 2'">
+                <ng-template awWizardStepSymbol><i class="fa fa-upload"></i></ng-template>
+                <div class="centered-content">
+                  <div>
+                    <form>
+                  <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                      <!--                      <h4>Basic mat-select</h4>-->
+                      <mat-form-field class="w-100">
+                        <mat-label>Sélectionner un package</mat-label>
+                        <mat-select>
+                          <mat-option *ngFor="let pk of packages" [value]="pk.id">
+                            {{pk.nom}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+                    <div class="col-3"></div>
+                  </div>
+
+                    </form>
+                  </div>
+
+                  <div class="text-right">
+                    <button class="btn-hover btn-border-radius color-10"
+                            awPreviousStep>Précédente</button>
+                    <button class="btn-hover btn-border-radius color-8" awNextStep>Suivant</button>
+                  </div>
+
+                </div>
+              </aw-wizard-step>
+              <aw-wizard-step [stepTitle]="'Step 3'">
+                <ng-template awWizardStepSymbol><i class="fa fa-file"></i></ng-template>
+                <div class="row">
+                  <div class="col-1"></div>
+                  <div class="col-10">
+                    <div class="form-group">
+                      <textarea class="form-control" cols="10" rows="5">
+                        Feature: SeConnecter feature
+                          Scenario: menu Se connecter
+                          Given l'utilisateur dans la page jumia.com.tn
+                          When le titre de la page est Jumia Tunisie | Vente & Achat en Ligne | Téléphones , Epicerie , Santé & Hygiène
+                          Then l'utilisateur clique sur Se connecter
+                          Then le menu s'affiche avec les liens SE CONNECTER et CREER UN COMPTE et Votre compte et Vos commandes et Votre liste d'envies
+                          Then l'utilisateur clique sur le bouton SECONNECTER
+                          >Given utilisateur est dans la page de connexion
+
+                      </textarea>
+                    </div>
+                  </div>
+                  <div class="col-1"></div>
+                </div>
+                <div class="text-right">
+                  <button class="btn-hover btn-border-radius color-10"
+                          awPreviousStep>Précédente</button>
+                  <button class="btn-hover btn-border-radius color-8" awNextStep>Suivant</button>
+                </div>
+
+              </aw-wizard-step>
+              <aw-wizard-step [stepTitle]="'Step 4'">
+                <ng-template awWizardStepSymbol><i class="fa fa-file"></i></ng-template>
+                <div class="centered-content">
+                  <div class="mt-3 font-bold justify-content-center">
+                    Cliqué sur terminer pour que tu puisse voir les rapports
+                  </div>
+                  <div class="text-right">
+                    <button class="btn-hover btn-border-radius color-10"
+                            awPreviousStep>Précédente</button>
+                    <button class="btn-hover btn-border-radius color-5" (click)="openDashbord()">Terminer</button>
+                  </div>
+
+                </div>
+              </aw-wizard-step>
+            </aw-wizard>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
