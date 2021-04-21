@@ -18,12 +18,14 @@
                   <ul class="header-buttons-left m-l-5">
                     <li class="dropdown m-l-20">
                       <h2>
-                        <strong>Advance Table</strong></h2>
+                        <strong>Table des utilisateurs</strong></h2>
                     </li>
                     <li class="dropdown m-l-20">
                       <label for="search-input"><i
-                        class="material-icons search-icon">search</i></label>
-                      <input placeholder="Search" type="text" class="browser-default search-field"
+                        class="material-icons search-icon">
+
+                      </i></label>
+                      <input placeholder="Recherche" type="text" class="browser-default search-field"
                              (keyup)='filterDatatable($event, table)' aria-label="Search box">
                     </li>
                   </ul>
@@ -92,7 +94,7 @@
 
                             <div class="modal-about">
                               <div class="font-weight-bold p-t-10 font-17">
-                                Nouveau utilisateur</div>
+                                Nouvel utilisateur</div>
                             </div>
                           </div>
                         </div>
@@ -113,31 +115,30 @@
                             <div class="input-field col s6">
                               <i class="material-icons prefix">perm_identity</i>
                               <input formControlName="nom" class="form-control"
-                                     placeholder="Entrez votre nom">
+                                     placeholder="Nom">
                             </div>
                             <div class="input-field col s6">
                               <i class="material-icons prefix">perm_identity</i>
                               <input formControlName="prenom" class="form-control"
-                                     placeholder="Entrez votre prenom">
+                                     placeholder="Prénom">
                             </div>
                           </div>
                           <div class="row">
                             <div class="input-field col s12">
                               <i class="material-icons prefix">account_circle</i>
                               <input formControlName="login" class="form-control"
-                                     placeholder="login">
+                                     placeholder="Login">
                             </div>
                             <div class="input-field col s12">
                               <i class="material-icons prefix">vpn_key</i>
                               <input formControlName="mdp" class="form-control"
-                                     placeholder="mote de pass">
+                                     placeholder="Mot de passe">
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
-                              <label>selectionner le role</label>
                               <select class="browser-default" formControlName="role">
-                                <option value="All" [selected]="'All'">selectionner un role</option>
+                                <option value="All" [selected]="'All'">Sélectionner un rôle</option>
                                 <option [ngValue]="role.id" *ngFor="let role of roles" >{{ role?.nom }}  </option>
                               </select>
                             </div>
@@ -145,10 +146,10 @@
                           <div class="modal-footer">
                             <div class="button-demo">
                               <button type="submit"
-                                      class="btn btn-outline-success btn-border-radius">Save</button>
+                                      class="btn btn-outline-success btn-border-radius">Enregistrer</button>
                               <button type="button"
                                       class="btn btn-outline-warning btn-border-radius"
-                                      data-dismiss="modal">Cancel</button>
+                                      data-dismiss="modal">Annuler</button>
                             </div>
                           </div>
                         </form>
@@ -187,13 +188,13 @@
                               <i class="material-icons prefix">perm_identity</i>
                               <input id="icon_prefix" formControlName="nom"
                                      type="text" class="validate">
-                              <label for="icon_prefix">First Name</label>
+                              <label for="icon_prefix">Prénom</label>
                             </div>
                             <div class="input-field col s6">
                               <i class="material-icons prefix">perm_identity</i>
                               <input id="icon_telephone" formControlName="prenom"
                                      type="text" class="validate">
-                              <label for="icon_telephone">Last Name</label>
+                              <label for="icon_telephone">Nom</label>
                             </div>
                           </div>
                           <div class="row">
@@ -207,15 +208,14 @@
                               <i class="material-icons prefix">vpn_key</i>
                               <input id="icon_telephone" formControlName="mdp"
                                      type="text" class="validate">
-                              <label for="icon_telephone"></label>
+                              <label for="icon_telephone">Mot de passe</label>
                             </div>
                           </div>
 
                           <div class="row">
                             <div class="col-md-12">
-                              <label>selectionner le nom de role</label>
                               <select class="browser-default" formControlName="role">
-                                <option value="All" [selected]="'All'">selectionner le nom du projet</option>
+                                <option value="All" [selected]="'All'">Sélectionner le projet</option>
                                 <option [ngValue]="role.id" *ngFor="let role of roles" >{{ role?.nom }}  </option>
                               </select>
                             </div>
@@ -223,10 +223,10 @@
                           <div class="modal-footer">
                             <div class="button-demo">
                               <button type="submit"
-                                      class="btn btn-outline-success btn-border-radius">Save</button>
+                                      class="btn btn-outline-success btn-border-radius">Enregistrer</button>
                               <button type="button"
                                       class="btn btn-outline-warning btn-border-radius"
-                                      data-dismiss="modal">Cancel</button>
+                                      data-dismiss="modal">Annuler</button>
                             </div>
                           </div>
                         </form>

@@ -5,6 +5,7 @@ import {UserService} from '../../shared/user.service';
 import {ProjectService} from '../../shared/project.service';
 import {RoleService} from '../../shared/role.service';
 import {Router} from '@angular/router';
+import {PkTestService} from '../../shared/pk-test.service';
 
 @Component({
   selector: 'app-bdd-consult',
@@ -16,16 +17,13 @@ export class BddConsultComponent implements OnInit {
   projects: ProjectModel[];
   numbers: number[] = [1, 2, 5, 6];
   projectUrl: string = null;
-  packages: pkTest[] = [
-    {id: '1', nom: 'login'},
-    {id: '2', nom: 'register'},
-    {id: '4', nom: 'payement'},
-    {id: '5', nom: 'ajouter au panier'},
-    {id: '6', nom: 'filter'}
-  ];
+  pmo: {id: string, nom: string};
+  packages: pkTest[] = [];
   roleId: number = +localStorage.getItem('roleId');
+  private nomProject: string;
   constructor(private userService: UserService,
               private projectService: ProjectService,
+              private pkService: PkTestService,
               private roleService: RoleService,
               private router: Router
   ) { }
@@ -37,7 +35,24 @@ export class BddConsultComponent implements OnInit {
       console.log('project come ', this.projects);
     });
   }
-
+  onLoadPk() {
+    const idp = +localStorage.getItem('idProject');
+    this.projectService.getProject(idp).subscribe((pro) => {
+      this.nomProject = pro.nom;
+      console.log('nomm p', this.nomProject);
+      this.pkService.pkList().subscribe(
+        (listpk) => {
+          for (const pk of listpk) {
+            console.log('pk project name', pk.projets[0].nom);
+            if ( pk.projets[0].nom === this.nomProject ) {
+              const namePP = pk.nom.substring(0, pk.nom.indexOf('.'));
+              this.packages.push({id: String(pk.id), nom: namePP});
+            }
+          }
+        });
+    });
+    console.log(this.packages);
+  }
   openIntelig() {
     const WshShell = WScript.CreateObject('WScript.Shell');
     WshShell.Run('C:\\Program Files\\Notepad++\\notepad++.exe', 1, true);
@@ -45,6 +60,18 @@ export class BddConsultComponent implements OnInit {
     console.log('hello');
     // window.open('C:\\\\Program Files\\\\Notepad++\\\\notepad++.exe');
   }
+
+  changeProject(data) {
+    // this.projectUrl = data;
+    console.log('geloooooooo ' + data);
+    this.projectService.getProject(+data).subscribe((project) => {
+      console.log('geloooooooo222 ', project);
+      this.projectUrl = project.url;
+      localStorage.setItem('idProject', String(project.id));
+    });
+  }
+
+
   onSubmit() {
     console.log('project url', this.projectUrl);
   }

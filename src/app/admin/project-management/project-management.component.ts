@@ -107,11 +107,11 @@ export class ProjectManagementComponent implements OnInit {
   }
 
   onChargeRoles() {
-   this.projectService.getAllProjects().subscribe((data) => {
-     this.projects = data;
-     // console.log('all projects ', data);
-   });
-   M.updateTextFields();
+    this.projectService.getAllProjects().subscribe((data) => {
+      this.projects = data;
+      // console.log('all projects ', data);
+    });
+    M.updateTextFields();
   }
 
 
@@ -153,6 +153,7 @@ export class ProjectManagementComponent implements OnInit {
       console.log('project: ', data);
     });
     form.reset();
+    // $('#addProject').hide();
     $('#addProject').modal('hide');
     this.showNotification('bg-green', 'le Project a été ajouter avec succée', 'bottom', 'right', 'animated fadeInRight', 'animated fadeOutRight');
   }
@@ -185,8 +186,8 @@ export class ProjectManagementComponent implements OnInit {
         this.roleService.updateRole(+role.id, newRole).subscribe(() => {
           console.log('updated');
         });
-     }
-   }, () => {
+      }
+    }, () => {
 
     }, () => {
       this.projectService.deleteProject(projectId).subscribe(() => {
@@ -203,30 +204,30 @@ export class ProjectManagementComponent implements OnInit {
   // ajouter un projet à un role
 
   addProjectToRole(row) {
-      const oldProjectTab: ProjectModel[] = row.projets;
-      const newPOrojectTab: ProjectModel[] = [];
-      this.addRowForm.patchValue({
-        roleId: row.id,
-        roleNom: row.nom,
-        project: 'All'
-      });
-      this.projectService.getAllProjects().subscribe((data) => {
-        // console.log('data', data);
-        // console.log('ols tab projects', oldProjectTab);
-        for (const pro1 of data ) {
-          let ok = false;
-          for (const pro2 of oldProjectTab) {
-            if ( pro1.id === pro2.id ) {
-              ok = true;
-              // console.log('egale ', ok);
-            }
-          }
-          if ( !ok ) {
-              newPOrojectTab.push(pro1);
+    const oldProjectTab: ProjectModel[] = row.projets;
+    const newPOrojectTab: ProjectModel[] = [];
+    this.addRowForm.patchValue({
+      roleId: row.id,
+      roleNom: row.nom,
+      project: 'All'
+    });
+    this.projectService.getAllProjects().subscribe((data) => {
+      // console.log('data', data);
+      // console.log('ols tab projects', oldProjectTab);
+      for (const pro1 of data ) {
+        let ok = false;
+        for (const pro2 of oldProjectTab) {
+          if ( pro1.id === pro2.id ) {
+            ok = true;
+            // console.log('egale ', ok);
           }
         }
-        this.projects = newPOrojectTab;
-      });
+        if ( !ok ) {
+          newPOrojectTab.push(pro1);
+        }
+      }
+      this.projects = newPOrojectTab;
+    });
 
   }
 
@@ -241,11 +242,11 @@ export class ProjectManagementComponent implements OnInit {
       newProjectTab[newProjectTab.length] = projectCome;
       const newRole: RoleModel = new RoleModel(oldRole.id, oldRole.nom, oldRole.users, newProjectTab);
       this.roleService.updateRole(roleId, newRole).subscribe((data) => {
-          console.log('salut');
-          this.roleService.getRoles().subscribe((data) => {
-            this.roles = data;
-          });
+        console.log('salut');
+        this.roleService.getRoles().subscribe((data) => {
+          this.roles = data;
         });
+      });
     });
     form.reset();
     $('#addModal').modal('hide');
@@ -274,12 +275,12 @@ export class ProjectManagementComponent implements OnInit {
       }
       const newRole: RoleModel = new RoleModel(oldRole.id, oldRole.nom, oldRole.users, newProjectTab);
       this.roleService.updateRole(roleId, newRole).subscribe((data) => {
-          console.log('salut');
-          this.roleService.getRoles().subscribe((data) => {
-            this.roles = data;
-          });
+        console.log('salut');
+        this.roleService.getRoles().subscribe((data) => {
+          this.roles = data;
         });
       });
+    });
     form.reset();
     $('#editModal').modal('hide');
     this.showNotification('bg-red', 'le projet a été effacer avec succée', 'bottom', 'right', 'animated fadeInRight', 'animated fadeOutRight');

@@ -1,5 +1,5 @@
-import {UserModel} from "./user-model";
-import {ProjectModel} from "./project-model";
+import {UserModel} from './user-model';
+import {ProjectModel} from './project-model';
 
 export class RoleModel {
   constructor(

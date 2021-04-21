@@ -1,12 +1,15 @@
 import {ProjectModel} from './project-model';
+import {BddModel} from './BddModel';
+import {ScriptModel} from './script-model';
 
 export class PackageTestModel {
   constructor(
-    public id: number,
     public nom: string,
-    public bdd: string,
-    public rapprot: string,
-    public projets: ProjectModel[]
+    public projets: ProjectModel[],
+    public rapport?: string,
+    public bdds?: BddModel[],
+    public scripts?: ScriptModel[],
+    public id?: number,
   ) {
   }
 }

@@ -144,7 +144,16 @@ export class SigninComponent implements OnInit {
         localStorage.setItem('role', this.user.role.nom);
         localStorage.setItem('roleId', String(this.user.role.id));
         localStorage.setItem('connected', 'true');
+
+        if ( data.role.nom === 'admin') {
+        this.router.navigate(['/admin/users-management']);
+        } else if ( data.role.nom === 'Équipe qualité' ) {
+        this.router.navigate(['/test/test-steps']);
+        } else if ( data.role.nom === 'Équipe software' ) {
+        this.router.navigate(['/bdd/consult']);
+        } else {
         this.router.navigate(['/dashboard/main']);
+        }
       }
     });
 

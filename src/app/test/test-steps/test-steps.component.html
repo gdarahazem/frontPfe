@@ -5,7 +5,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <ul class="breadcrumb breadcrumb-style ">
             <li class="breadcrumb-item">
-              <h4 class="page-title">Tester votre application</h4>
+              <h4 class="page-title">Tester votre projet</h4>
             </li>
             <li class="breadcrumb-item bcrumb-1">
               <a routerLink="/dashboard/main">
@@ -24,8 +24,7 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
           <div class="header">
-            <h2>
-              <strong>Les étapes de </strong> test</h2>
+
             <ul class="header-dropdown m-r--5">
               <li class="dropdown">
                 <a href="#" onClick="return false;" class="dropdown-toggle" data-toggle="dropdown"
@@ -48,35 +47,25 @@
           </div>
           <div class="body">
             <aw-wizard #wizard [navBarLayout]="'large-empty-symbols'">
-              <aw-wizard-step [stepTitle]="'Step 1'">
+              <aw-wizard-step [stepTitle]="'Étape 1'">
                 <ng-template awWizardStepSymbol><i class="fa fa-search"></i></ng-template>
                 <div class="centered-content">
                   <div>
                     <form #f1="ngForm">
-<!--                      <div class="form-group form-float">-->
-<!--                        <div class="form-line">-->
-<!--                          <input type="text" class="form-control" name="username"-->
-<!--                                 id="username" placeholder="Username">-->
-<!--                        </div>-->
-<!--                      </div>-->
-
                       <div class="mt-5 pt-3 mb-5 row">
                         <div class="col-8">
-                          <h4>choisissez un projet</h4>
+                          <h4>Choisir un projet</h4>
                           <mat-form-field style="width:100%;">
-                            <mat-label>sélectionner un projet</mat-label>
-                            <mat-select #sval (valueChange)="changeProject(sval.value)" >
-                              <mat-option *ngFor="let project of projects" [value]="project.url">
+                            <mat-label>Sélectionner un projet</mat-label>
+                            <mat-select #sval (valueChange)="changeProject(sval.value)">
+                              <mat-option *ngFor="let project of projects" [value]="project.id">
                                 {{project.nom}}
                               </mat-option>
                             </mat-select>
                           </mat-form-field>
                           <a [href]="projectUrl" *ngIf="projectUrl !== null" target="_blank">visualiser le projet</a>
                         </div>
-
-
                       </div>
-
                     </form>
                   </div>
                   <div class="text-right">
@@ -84,104 +73,109 @@
                   </div>
                 </div>
               </aw-wizard-step>
-              <aw-wizard-step [stepTitle]="'Step 2'">
+              <aw-wizard-step [stepTitle]="'étape 2'">
                 <ng-template awWizardStepSymbol><i class="fa fa-upload"></i></ng-template>
                 <div class="centered-content">
-                  <div>
-                    <form>
-                      <div class="row justify-content-center mb-2">
-                        <div class="mt-3 mb-3">
-                          <button type="button" class="btn btn-outline-default btn-border-radius" (click)="openIntelig()">Ouvrir IDE pour ajouter un nouveau cas de test</button>
+                  <div class="row clearfix">
+
+                    <div class="col-sm-6">
+
+                        <div class="file-field input-field">
+                          <div class="btn">
+                            <span>BDD</span>
+                            <input type="file" multiple (change)="onLoadBdd($event)">
+                          </div>
+                          <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text"
+                                   placeholder="Importer les fichiers des Features"
+                            >
+                          </div>
                         </div>
+
+                      <div class="file-field input-field">
+                        <div class="btn">
+                          <span>Script</span>
+                          <input type="file" multiple (change)="onloadScript($event)">
+                        </div>
+
+                        <div class="file-path-wrapper">
+                          <input class="file-path validate" type="text"
+                                 placeholder="Importer les fichiers des Steps">
+
+                        </div>
+
                       </div>
-                      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-                        <!--- Note that these columns can be defined in any order.
-                              The actual rendered columns are set as a property on the row definition" -->
+                      <div class="file-field input-field">
+                        <input (input)="onChangeRapport($event.target.value)" class="form-control" type="text" placeholder="Entrez le src de votre rapport">
+                      </div>
 
-                        <!-- Position Column -->
-                        <ng-container matColumnDef="id">
-                          <th mat-header-cell *matHeaderCellDef> ID. </th>
-                          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                        </ng-container>
+                      <div>
+                        <button class="btn btn-primary btn-sm" (click)="onUploadFile()">Enregistrer</button>
+                      </div>
 
-                        <!-- Name Column -->
-                       <ng-container matColumnDef="nom">
-                          <th mat-header-cell *matHeaderCellDef> Nom </th>
-                          <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="delete">
-                          <th mat-header-cell *matHeaderCellDef> Action 1 </th>
-                          <td mat-cell *matCellDef="let element"> <button style="border: none"><span class="material-icons text-danger">delete</span></button> </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="update">
-                          <th mat-header-cell *matHeaderCellDef>  Action 2 </th>
-                          <td mat-cell *matCellDef="let element"> <button style="border: none;"><span class="material-icons text-warning" >system_update_alt</span></button> </td>
-                        </ng-container>
-
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                      </table>
-
-
-
-                    </form>
+                    </div>
                   </div>
 
+                  <table class="table">
+                    <tr>
+                      <th>les fichier de bdd</th>
+                      <th>les fichier de script</th>
+                    </tr>
+                    <tr *ngFor="let pk of pkTestResultD">
+                      <td *ngIf="pk.projets[0].nom == nomProject"><a href="">{{ pk.bdds[0].nomFicher }}</a></td>
+                      <td *ngIf="pk.projets[0].nom == nomProject"><a href="">{{ pk.scripts[0].nomFichier }}</a></td>
+                    </tr>
+<!--                    <tr>-->
+<!--                      <td><a href="">seConnecter.feature</a></td>-->
+<!--                      <td><a href="">seConnecter.java</a></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <td><a href="">creerUnCompte.feature</a></td>-->
+<!--                      <td><a href="">creerUnCompte.java</a></td>-->
+<!--                    </tr>-->
+                  </table>
                   <div class="text-right">
                     <button class="btn-hover btn-border-radius color-10"
-                            awPreviousStep>Précédente</button>
+                            awPreviousStep>Précédent</button>
                     <button class="btn-hover btn-border-radius color-8" awNextStep>Suivant</button>
                   </div>
 
                 </div>
               </aw-wizard-step>
-              <aw-wizard-step [stepTitle]="'Step 3'">
-                <ng-template awWizardStepSymbol><i class="fa fa-upload"></i></ng-template>
-                <div class="centered-content">
-                  <div>
-                    <form>
-                      <div class="row mt-3">
-                        <div class="col-3"></div>
-                        <div class="col-6">
-                          <mat-form-field class="w-100">
-                            <mat-label>sélectionner les packages que vous souhaitez tester</mat-label>
-                            <mat-select [formControl]="pakageSelected" multiple>
-                              <mat-option *ngFor="let package of packageList" [value]="package">{{package}}</mat-option>
-                            </mat-select>
-                          </mat-form-field>
+<!--              <aw-wizard-step [stepTitle]="'étape 3'">-->
+<!--                <ng-template awWizardStepSymbol><i class="fa fa-upload"></i></ng-template>-->
+<!--                <div class="centered-content">-->
+<!--                  <div>-->
+<!--                    <form>-->
+<!--                      <div class="row mt-3">-->
+<!--                        <div class="col-3"></div>-->
 
-                        </div>
-                        <div class="col-3"></div>
-                      </div>
-                      <div class="d-flex justify-content-center">
-                        <div>
-                          <button type="button" class="btn btn-success waves-effect">
-                            <i class="material-icons">play_arrow</i>
-                            <span>exécuter</span>
-                          </button>
-                        </div>
-                      </div>
+<!--                        <div class="col-6">-->
+<!--                          <div class="input-field">-->
+<!--                            <input (input)="onChangeRapport($event.target.value)" class="form-control" type="text" placeholder="Entrez le src de votre rapport">-->
+<!--                          </div>-->
+<!--                        </div>-->
 
-                    </form>
-                  </div>
+<!--                      </div>-->
 
-                  <div class="text-right">
-                    <button class="btn-hover btn-border-radius color-10"
-                            awPreviousStep>Précédente</button>
-                    <button class="btn-hover btn-border-radius color-8" awNextStep>Suivant</button>
-                  </div>
 
-                </div>
-              </aw-wizard-step>
-              <aw-wizard-step [stepTitle]="'Step 4'">
+<!--                    </form>-->
+<!--                  </div>-->
+
+<!--                  <div class="text-right">-->
+<!--                    <button class="btn-hover btn-border-radius color-10"-->
+<!--                            awPreviousStep>Précédent</button>-->
+<!--                    <button (click)="addRapport()" class="btn-hover btn-border-radius color-8" awNextStep>Suivant</button>-->
+<!--                  </div>-->
+
+<!--                </div>-->
+<!--              </aw-wizard-step>-->
+              <aw-wizard-step [stepTitle]="'étape 3'">
                 <ng-template awWizardStepSymbol><i class="fa fa-file"></i></ng-template>
                 <div class="centered-content">
                   <div class="mt-3 font-bold justify-content-center">
-                    Cliqué sur terminer pour que tu puisse voir les rapports
+                    Cliquer sur terminer pour voire les rapports
                   </div>
                   <div class="text-right">
                     <button class="btn-hover btn-border-radius color-10"

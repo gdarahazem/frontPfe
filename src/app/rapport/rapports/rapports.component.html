@@ -29,7 +29,17 @@
 
           </div>
           <div class="body">
-            <img src="assets/images/autre/testngReports.png" alt="resultat de test">
+<!--            <img src="assets/images/autre/testngReports.png" alt="resultat de test">-->
+            <table class="table">
+              <tr>
+                <th>projet</th>
+                <th>rapport</th>
+              </tr>
+              <tr *ngFor="let rapportProject of rapportModel">
+                <td>{{ rapportProject.project }}</td>
+                <td><a [href]="rapportProject.rapport" target = "_blank" >consulter rapport</a></td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>

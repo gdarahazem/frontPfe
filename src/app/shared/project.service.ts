@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ProjectModel} from './project-model';
+import {RoleModel} from "./role-model";
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,9 @@ export class ProjectService {
 
   deleteProject(id: number): Observable<void> {
     return this.http.delete<void>('http://localhost:8090/projects/' + id);
+  }
+
+  updateProject(id: number, project: ProjectModel): Observable<void> {
+    return this.http.put<void>('http://localhost:8090/projects/' + id, project);
   }
 }

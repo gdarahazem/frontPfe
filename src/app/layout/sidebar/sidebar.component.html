@@ -33,42 +33,40 @@
 <!--                    </ul>-->
 <!--                </li>-->
 
-                <li routerLinkActive="active">
+                <li routerLinkActive="active" [hidden]="verifyAdmin()">
                   <a href="#" onClick="return false;" class="menu-toggle" >
                     <i class="fas fa-user"></i>
-                    <span>Espace admin</span>
+                    <span>Espace Admininistrateur</span>
                   </a>
 
-                  <ul class="ml-menu">
-                    <li routerLinkActive="active">
-                      <a routerLink="admin/users-management">Gestion des utilisateurs</a>
+                  <ul class="ml-menu" id="admin" >
+                    <li routerLinkActive="active" >
+                      <a routerLink="admin/users-management" >Gestion des utilisateurs</a>
                     </li>
-                    <li routerLinkActive="active">
-                      <a routerLink="admin/project-management">Gestion de projet</a>
+                    <li routerLinkActive="active" >
+                      <a routerLink="admin/project-management">Gestion des projets</a>
                     </li>
-                    <li routerLinkActive="active">
-                      <a routerLink="dashboard/dashboard3">Autres</a>
-                    </li>
+
                   </ul>
                 </li>
 
 <!--              ********** test-->
-              <li routerLinkActive="active" *ngIf="roleState === 'Équipe qualité'">
+              <li routerLinkActive="active" [hidden]="verifyEq()">
                 <a routerLink="test/test-steps">
                   <i class="fas fa-robot"></i>
-                  <span>tester votre application</span>
+                  <span>Tester votre projet</span>
                 </a>
               </li>
-              <li routerLinkActive="active" *ngIf="roleState === 'Équipe software'">
+              <li routerLinkActive="active" [hidden]="verifyEs()">
                 <a routerLink="bdd/consult">
                   <i class="far fa-eye"></i>
-                  <span>visualiser les bdd</span>
+                  <span>Visualiser les scripts en BDD</span>
                 </a>
               </li>
 <!--              ********** report-->
 
 
-              <li routerLinkActive="active" *ngIf="roleState !== 'admin'">
+              <li routerLinkActive="active" [hidden]="verifyEqEs()">
                 <a routerLink="rapport/rapports">
                   <i class="far fa-bookmark"></i>
                   <span>Visualiser les rapports</span>

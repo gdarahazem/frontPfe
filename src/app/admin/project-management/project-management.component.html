@@ -1,12 +1,12 @@
 <section class="content">
   <div class="container-fluid">
     <!-- Basic Examples -->
-<!--    <div class="alert alert-info">-->
-<!--      Advance table component is develop using <strong>ngx-datatable</strong> angular plugin. Main features of-->
-<!--      this table is search record in table, add new record, edit record, delete record, sorting data by-->
-<!--      ascending and descending, pagination, and many more. You have just replace table static json data with your-->
-<!--      dynamic json data comes from your api.-->
-<!--    </div>-->
+    <!--    <div class="alert alert-info">-->
+    <!--      Advance table component is develop using <strong>ngx-datatable</strong> angular plugin. Main features of-->
+    <!--      this table is search record in table, add new record, edit record, delete record, sorting data by-->
+    <!--      ascending and descending, pagination, and many more. You have just replace table static json data with your-->
+    <!--      dynamic json data comes from your api.-->
+    <!--    </div>-->
 
     <div class="row clearfix">
 
@@ -25,7 +25,7 @@
                     <li class="dropdown m-l-20">
                       <label for="search-input"><i
                         class="material-icons search-icon">search</i></label>
-                      <input placeholder="Search" type="text" class="browser-default search-field"
+                      <input placeholder="Recherche" type="text" class="browser-default search-field"
                              (keyup)='filterDatatable($event, table)' aria-label="Search box">
                     </li>
 
@@ -43,7 +43,7 @@
                 </div>
                 <ngx-datatable #table class="material" [rows]="roles" [columns]="columns"
                                [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
-                               [rowHeight]="'auto'" [limit]="10">
+                               [rowHeight]="'auto'" [limit]="2">
                   <ngx-datatable-column name="id" [width]="130"></ngx-datatable-column>
                   <ngx-datatable-column name="nom" [width]="130"></ngx-datatable-column>
                   <ngx-datatable-column name="projets" [width]="200" style="height: 200px;">
@@ -81,7 +81,7 @@
 
                             <div class="modal-about">
                               <div class="font-weight-bold p-t-10 font-17">
-                                Affecter un projet à un role</div>
+                                Affecter un projet à un rôle</div>
                             </div>
                           </div>
                         </div>
@@ -91,7 +91,7 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                          <form [formGroup]="addRowForm" (ngSubmit)="onSaveProjectR(addRowForm)">
+                        <form [formGroup]="addRowForm" (ngSubmit)="onSaveProjectR(addRowForm)">
                           <input formControlName="roleId" class="form-control" type="hidden">
                           <div class="row">
                             <div class="input-field col s12">
@@ -102,9 +102,8 @@
                           </div>
                           <div class="row">
                             <div class="col-md-12">
-                              <label>selectionner le nom du projet</label>
                               <select class="browser-default" formControlName="project">
-                                <option value="All" [selected]="'All'">selectionner le nom du projet</option>
+                                <option value="All" [selected]="'All'">Sélectionner le nom du projet</option>
                                 <option [ngValue]="project.id" *ngFor="let project of projects" >{{ project?.nom }}  </option>
                               </select>
                             </div>
@@ -113,10 +112,10 @@
                           <div class="modal-footer">
                             <div class="button-demo">
                               <button type="submit"
-                                      class="btn btn-outline-success btn-border-radius">Save</button>
+                                      class="btn btn-outline-success btn-border-radius">Enregistrer</button>
                               <button type="button"
                                       class="btn btn-outline-warning btn-border-radius"
-                                      data-dismiss="modal">Cancel</button>
+                                      data-dismiss="modal">Annuler</button>
                             </div>
                           </div>
                         </form>
@@ -134,7 +133,8 @@
                           <div class="modal-header clearfix">
                             <div class="modal-about">
                               <div class="font-weight-bold p-t-10 font-17">
-                                </div>
+                                Supprimer un projet pour ce rôle
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -158,9 +158,8 @@
 
                           <div class="row">
                             <div class="col-md-12">
-                              <label>selectionner le nom du projet</label>
                               <select class="browser-default" formControlName="project">
-                                <option value="All" [selected]="'All'">selectionner le nom du projet</option>
+                                <option value="All" [selected]="'All'">Sélectionner le nom du projet</option>
                                 <option [ngValue]="project.id" *ngFor="let project of projects" >{{ project?.nom }}  </option>
                               </select>
                             </div>
@@ -169,10 +168,10 @@
                           <div class="modal-footer">
                             <div class="button-demo">
                               <button type="submit"
-                                      class="btn btn-outline-success btn-border-radius">Save</button>
+                                      class="btn btn-outline-success btn-border-radius">Enregistrer</button>
                               <button type="button"
                                       class="btn btn-outline-warning btn-border-radius"
-                                      data-dismiss="modal">Cancel</button>
+                                      data-dismiss="modal">Annuler</button>
                             </div>
                           </div>
 
@@ -181,7 +180,7 @@
                     </div>
                   </div>
                 </div>
-<!--                add project *******************-->
+                <!--                add project *******************-->
                 <div class="modal fade" id="addProject" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -224,10 +223,10 @@
                           <div class="modal-footer">
                             <div class="button-demo">
                               <button type="submit"
-                                      class="btn btn-outline-success btn-border-radius">Save</button>
+                                      class="btn btn-outline-success btn-border-radius">Enregistrer</button>
                               <button type="button"
                                       class="btn btn-outline-warning btn-border-radius"
-                                      data-dismiss="modal">Cancel</button>
+                                      data-dismiss="modal">Annuler</button>
                             </div>
                           </div>
                         </form>
@@ -236,7 +235,7 @@
                   </div>
                 </div>
 
-<!--                delete project*************************-->
+                <!--                delete project*************************-->
                 <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -246,7 +245,7 @@
                           <div class="modal-header clearfix">
                             <div class="modal-about">
                               <div class="font-weight-bold p-t-10 font-17">
-                               Supprimer un projet</div>
+                                Supprimer un projet</div>
                             </div>
                           </div>
                         </div>
@@ -258,34 +257,33 @@
                       <div class="modal-body">
                         <form [formGroup]="deleteProjectForm" (ngSubmit)="onDeleteProject(deleteProjectForm)">
 
-                      <div class="row">
+                          <div class="row">
 
-                          <div class="col-md-12">
-                            <label>selectionner le nom du projet</label>
-                            <select class="browser-default" formControlName="project">
-                              <option value="All" [selected]="'All'">selectionner le nom du projet</option>
-                              <option [ngValue]="project.id" *ngFor="let project of projects" >{{ project?.nom }}  </option>
-                            </select>
+                            <div class="col-md-12">
+                              <select class="browser-default" formControlName="project">
+                                <option value="All" [selected]="'All'">Sélectionner le nom du projet</option>
+                                <option [ngValue]="project.id" *ngFor="let project of projects" >{{ project?.nom }}  </option>
+                              </select>
+                            </div>
                           </div>
-                      </div>
 
-<!--                          <div class="row">-->
-<!--                            <div class="col s12">-->
-<!--                              <div class="p-l-40  col s12">-->
-<!--                                <select formControlName="project">-->
-<!--                                  <option value="" disabled selected>select project</option>-->
-<!--                                  <option value="project.id" *ngFor="let project of projects" style="background-color: black">{{ project?.nom }}  </option>-->
-<!--                                </select>-->
-<!--                              </div>-->
-<!--                            </div>-->
-<!--                          </div>-->
+                          <!--                          <div class="row">-->
+                          <!--                            <div class="col s12">-->
+                          <!--                              <div class="p-l-40  col s12">-->
+                          <!--                                <select formControlName="project">-->
+                          <!--                                  <option value="" disabled selected>select project</option>-->
+                          <!--                                  <option value="project.id" *ngFor="let project of projects" style="background-color: black">{{ project?.nom }}  </option>-->
+                          <!--                                </select>-->
+                          <!--                              </div>-->
+                          <!--                            </div>-->
+                          <!--                          </div>-->
                           <div class="modal-footer">
                             <div class="button-demo">
                               <button type="submit"
-                                      class="btn btn-outline-success btn-border-radius">Save</button>
+                                      class="btn btn-outline-success btn-border-radius">Enregistrer</button>
                               <button type="button"
                                       class="btn btn-outline-warning btn-border-radius"
-                                      data-dismiss="modal">Cancel</button>
+                                      data-dismiss="modal">Annuler</button>
                             </div>
                           </div>
                         </form>
@@ -301,4 +299,3 @@
     </div>
   </div>
 </section>
-
